@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!-- <!DOCTYPE HTML>
 <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -187,6 +187,408 @@
 
             </tbody>
           </table>
+
+          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+            <tbody>
+              <tr>
+                <td style="padding:0px">
+                  <br>
+                  <p style="text-align:center;font-size:small;">
+                    This website's source code is borrowed from <a href="https://github.com/jonbarron/jonbarron_website">Jon Barron</a>.
+                    <br>Last Updated: September 2025
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+  (function () {
+    const showSelectedBtn = document.getElementById('show-selected');
+    const showAllBtn = document.getElementById('show-all');
+    const papersTable = document.getElementById('papers');
+
+    if (!showSelectedBtn || !showAllBtn || !papersTable) return;
+
+    const nonRepRows = Array.from(papersTable.querySelectorAll('tr:not(.representative)'));
+
+    function showSelectedPapers() {
+      nonRepRows.forEach(tr => tr.style.display = 'none');
+      showSelectedBtn.classList.add('active');
+      showAllBtn.classList.remove('active');
+    }
+
+    function showAllPapers() {
+      nonRepRows.forEach(tr => tr.style.display = ''); // Resets to default display
+      showAllBtn.classList.add('active');
+      showSelectedBtn.classList.remove('active');
+    }
+
+    // Add click event listeners
+    showSelectedBtn.addEventListener('click', showSelectedPapers);
+    showAllBtn.addEventListener('click', showAllPapers);
+
+    // Set the initial state on page load
+    showSelectedPapers();
+  })();
+  </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Souradeep Mukhopadhyay</title>
+  <meta name="author" content="Souradeep Mukhopadhyay">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💡</text></svg>">
+
+<style>
+
+  heading {
+    display: block;
+    margin: 0 0 0 0; 
+  }
+  .toggle-container {
+    text-align: left;
+    margin: 12px 0 0 0; 
+  }
+
+  #papers {
+    margin-top: 2px;         
+    border-spacing: 0;       
+  }
+
+  #papers > tbody > tr:first-child > td {
+    padding-top: 6px !important; 
+  }
+
+  .toggle-link {
+    cursor: pointer;
+    color: #888;
+    font-weight: 500;
+    margin: 0 4px 0 0;
+    transition: color 0.2s ease-in-out;
+  }
+  .toggle-link.active {
+    color: #000;
+    font-weight: 700;
+  }
+  .toggle-link:not(.active):hover {
+    color: #444;
+  }
+
+  /* ── Research Collaborations ── */
+  .collab-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 0 6px 0;
+  }
+  .collab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 110px;
+    text-align: center;
+  }
+  .collab-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: grayscale(20%);
+    transition: filter 0.2s;
+  }
+  .collab-item img:hover {
+    filter: grayscale(0%);
+  }
+  .collab-item span {
+    font-size: 11px;
+    color: #555;
+    line-height: 1.3;
+  }
+
+  /* ── Achievements ── */
+  .achievement-list {
+    list-style: none;
+    padding: 8px 0 0 0;
+    margin: 0;
+  }
+  .achievement-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .achievement-list li:last-child {
+    border-bottom: none;
+  }
+  .achievement-list li .ach-icon {
+    margin-top: 2px;
+    color: #c8a415;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+</style>
+
+
+</head>
+
+<body>
+  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+    <tbody>
+      <tr style="padding:0px">
+        <td style="padding:0px">
+          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+            <tbody>
+              <tr style="padding:0px">
+                <td style="padding:2.5%;width:63%;vertical-align:middle">
+                  <p style="text-align:center">
+                    <name>Souradeep Mukhopadhyay</name>
+                  </p>
+<p>
+  I am a first-year Ph.D. student in Computer Science at
+  <a href="https://www.asu.edu/">Arizona State University</a>
+  (QS World University Rankings 2026: #=173), advised by Prof.
+  <a href="https://www.public.asu.edu/~cbaral/">Chitta Baral</a>.
+  My research interests include LLM-based agentic systems, systematic LLM failure modes, and world models.
+</p>
+
+<p>
+  I received my B.Tech in Computer Science with First Class Honors and distinction from
+  <a href="https://jadavpuruniversity.in/">Jadavpur University</a>
+  (QS WUR 2026: #=676; NIRF 2025: #9 in University; #1 in State Public Universities),
+  where I was advised by Prof.
+  <a href="https://scholar.google.co.in/citations?user=bDj0BUEAAAAJ&hl=en">Ram Sarkar</a>.
+  I then completed my M.Tech. in Artificial Intelligence at the
+  <a href="https://iisc.ac.in/">Indian Institute of Science, Bengaluru</a>
+  (QS WUR 2026: #=219; NIRF 2025: #1 in University), and joined
+  <a href="https://www.nokia.com/contact-us/worldwide-offices/india/">Nokia</a>
+  as a Research Specialist for one year.
+</p>
+                  
+
+                  <p style="text-align:center">
+                    <a href="mailto:smukho11@asu.edu" style="margin: 0 5px;"><i class="fa-solid fa-envelope"></i></a> &nbsp;/&nbsp;
+                    <a href="Souradeep_CV.pdf" style="margin: 0 5px;"><i class="fa-solid fa-file"></i></a> &nbsp;/&nbsp;
+                    <a href="https://scholar.google.com/citations?user=Oz_A-coAAAAJ&hl=en" style="margin: 0 5px;"><i class="fa-brands fa-google-scholar"></i></a> &nbsp;/&nbsp;
+                    <a href="https://x.com/SouradeepM97426" style="margin: 0 5px;"><i class="fa-brands fa-x-twitter"></i></a> &nbsp;/&nbsp;
+                    <a href="https://github.com/Souradeep150/" style="margin: 0 5px;"><i class="fa-brands fa-github"></i></a>
+                  </p>
+                </td>
+                <td style="padding:2.5%;width:40%;max-width:40%">
+                  <a href="DP2.jpeg"><img style="width:100%;max-width:100%" alt="profile photo" src="DP2.jpeg" class="hoverZoomLink"></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;margin-top:-10px">
+            <tbody>
+              <tr style="padding:0px">
+                <td style="padding:2.5%;vertical-align:middle;width:63%">
+                  <a id="news"><heading>News</heading></a>
+                  <p>
+                    <div style="width:100%;overflow-y:scroll; height:100px;">
+                      <ul id="News">
+                        <li> January, 2026 - TAing in CSE 598(Agentic AI) under Prof. <a href="https://search.asu.edu/profile/231973">Chitta Baral</a> for Spring 2026.</li>
+                        <li> January, 2026 - Received the <b>SCAI</b> University Graduate Fellowship (UGF) of $4500.</li>
+                         <li> August, 2025 - TAing in CSE 100(Prin of Programming with C++) under Prof. <a href="https://search.asu.edu/profile/325953">Yoshihiro Kobayashi</a> for Fall 2025.</li>
+                        <li> August, 2025 - Started my PhD.</li>
+                      </ul>
+                    </div>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+            <tbody>
+              <tr>
+                <td style="padding:20px;width:100%;vertical-align:middle">
+                  <a id="research"><heading>Publications</heading></a>
+                  <div class="toggle-container">
+                    <span id="show-selected" class="toggle-link active">Selected</span>
+                    <span style="color: #ccc;">/</span>
+                    <span id="show-all" class="toggle-link">All</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table id="papers" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+            <tbody>
+
+              <tr class="representative">
+                <td style="padding:15px;width:25%;vertical-align:middle">
+                  <div style="text-align: center; display: flex; justify-content: center; align-items: center; overflow: hidden;">
+                    <img src="meta.jpeg" alt="spright" style="max-width: 100%; max-height: 100%; width: auto; height: auto;">
+                  </div>
+                </td>
+                <td width="75%" valign="middle">
+                  <span><papertitle>Meta-Learning to Teach Semantic Prompts for Open Domain Generalization in Vision-Language Models</papertitle></span>           
+                  <br>
+                  Shirsha Bose, Mainak Singha, Ankit Jha, <strong>Souradeep Mukhopadhyay</strong>, Biplab Banerjee
+                  <br>
+                  <em>Transaction on Machine Learning Research 2025</em>
+                  <p><a href="https://openreview.net/pdf?id=uJELgNGiMW">Paper</a> </p>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:15px;width:25%;vertical-align:middle">
+                  <div style="text-align: center; display: flex; justify-content: center; align-items: center; overflow: hidden;">
+                    <img src="nature.jpeg" alt="act2i" style="max-width: 100%; max-height: 100%; width: auto; height: auto;">
+                  </div>
+                </td>
+                <td width="75%" valign="middle">
+                  <span><papertitle>Deep Learning Model for Grading Carcinoma with Gini-based Feature Selection and Linear Production-inspired Feature Fusion</papertitle></span>
+                  <br>
+                   Shreyan Kundu*, <strong>Souradeep Mukhopadhyay*</strong>, Rahul Talukdar, Dmitrii Kaplun, Alexander Voznesensky, Ram Sarkar
+                  <br>
+                  <em> Nature Sci Reports 2025 </em>    
+                  <p><a href="https://www.nature.com/articles/s41598-025-00217-w">Paper</a></p>
+                </td>
+              </tr>
+
+                    <tr>
+                <td style="padding:15px;width:25%;vertical-align:middle">
+                  <div style="text-align: center; display: flex; justify-content: center; align-items: center; overflow: hidden;">
+                    <img src="oup.jpeg" alt="act2i" style="max-width: 100%; max-height: 100%; width: auto; height: auto;">
+                  </div>
+                </td>
+                <td width="75%" valign="middle">
+                  <span><papertitle>Towards molecular structure discovery from cryo-ET density volumes via modelling auxiliary semantic prototypes</papertitle></span>
+                  <br>
+                   Ashwin Nair, Xingjian Li, Bhupendra Solanki , <strong>Souradeep Mukhopadhyay</strong>, Ankit Jha, Mostofa Rafid Uddin, Mainak Singha, Biplab Banerjee, Min Xu
+                  <br>
+                  <em>Briefings in Bioinformatics, Oxford University Press 2025</em>    
+                  <p><a href="https://academic.oup.com/bib/article/26/1/bbae570/7960051">Paper</a></p>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+
+          <!-- ═══════════════════════════════════════════════
+               RESEARCH COLLABORATIONS
+               To add/remove an institute:
+                 • Add/remove a <div class="collab-item"> block
+                 • Set src to the institute logo file (e.g. "iisc_logo.png")
+                 • Update the <span> with the short institute name
+                 • Optionally wrap the <img> in <a href="..."> for a link
+          ══════════════════════════════════════════════════ -->
+          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+            <tbody>
+              <tr>
+                <td style="padding:20px 20px 6px 20px;width:100%;vertical-align:middle">
+                  <a id="collaborations"><heading>Research Collaborations</heading></a>
+                  <div class="collab-grid">
+
+                    <!-- Institute 1 — replace src, href, and label -->
+                    <div class="collab-item">
+                      <a href="https://www.asu.edu/" target="_blank">
+                        <img src="asu_logo.png" alt="Arizona State University"
+                             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Arizona_State_University_logo.svg/200px-Arizona_State_University_logo.svg.png'">
+                      </a>
+                      <span>Arizona State University</span>
+                    </div>
+
+                    <!-- Institute 2 -->
+                    <div class="collab-item">
+                      <a href="https://iisc.ac.in/" target="_blank">
+                        <img src="iisc_logo.png" alt="IISc Bengaluru"
+                             onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/3/3a/IISc_Master_Seal_Blue.svg/200px-IISc_Master_Seal_Blue.svg.png'">
+                      </a>
+                      <span>IISc Bengaluru</span>
+                    </div>
+
+                    <!-- Institute 3 -->
+                    <div class="collab-item">
+                      <a href="https://jadavpuruniversity.in/" target="_blank">
+                        <img src="ju_logo.png" alt="Jadavpur University"
+                             onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/4/4e/Jadavpur_University_Logo.svg/200px-Jadavpur_University_Logo.svg.png'">
+                      </a>
+                      <span>Jadavpur University</span>
+                    </div>
+
+                    <!-- ── ADD MORE INSTITUTES BELOW ──
+                    <div class="collab-item">
+                      <a href="INSTITUTE_URL" target="_blank">
+                        <img src="LOGO_FILE.png" alt="Institute Name">
+                      </a>
+                      <span>Institute Name</span>
+                    </div>
+                    -->
+
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+          <!-- ═══════════════════════════════════════════════
+               ACHIEVEMENTS
+               To add/remove an entry:
+                 • Add/remove a <li> inside .achievement-list
+                 • The <i> tag is the trophy icon — keep it as-is
+                 • Put the achievement text inside the <div>
+          ══════════════════════════════════════════════════ -->
+          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+            <tbody>
+              <tr>
+                <td style="padding:20px 20px 20px 20px;width:100%;vertical-align:middle">
+                  <a id="achievements"><heading>Achievements</heading></a>
+                  <ul class="achievement-list">
+
+                    <li>
+                      <i class="fa-solid fa-trophy ach-icon"></i>
+                      <div>Received the <strong>SCAI University Graduate Fellowship (UGF)</strong> of $4,500, Arizona State University (2026).</div>
+                    </li>
+
+                    <li>
+                      <i class="fa-solid fa-trophy ach-icon"></i>
+                      <div>Graduated with <strong>First Class Honors and Distinction</strong> in B.Tech Computer Science, Jadavpur University.</div>
+                    </li>
+
+                    <li>
+                      <i class="fa-solid fa-trophy ach-icon"></i>
+                      <div>Completed <strong>M.Tech. in Artificial Intelligence</strong> at the Indian Institute of Science, Bengaluru — ranked #1 University in India (NIRF 2025).</div>
+                    </li>
+
+                    <!-- ── ADD MORE ACHIEVEMENTS BELOW ──
+                    <li>
+                      <i class="fa-solid fa-trophy ach-icon"></i>
+                      <div>Your achievement text here.</div>
+                    </li>
+                    -->
+
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
 
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
