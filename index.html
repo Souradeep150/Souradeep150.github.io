@@ -441,8 +441,8 @@
     }
     .hero-photo img {
       width: 200px;
-      height: 200px;
-      object-fit: cover;
+      height: auto;
+      object-fit: contain;
       border-radius: 12px;
       display: block;
       position: relative;
@@ -565,8 +565,8 @@
     }
     .paper-thumb {
       width: 120px;
-      height: 90px;
-      object-fit: cover;
+      height: auto;
+      object-fit: contain;
       border-radius: 6px;
       background: var(--blue-lt);
     }
@@ -710,7 +710,7 @@
       .hero { grid-template-columns: 1fr; }
       .hero-photo { display: none; }
       .paper-card { grid-template-columns: 1fr; }
-      .paper-thumb { width: 100%; height: 140px; }
+      .paper-thumb { width: 100%; height: auto; }
       nav { gap: 12px; }
       .nav-links { gap: 16px; }
     }
@@ -867,7 +867,7 @@
 
       <a class="collab-card" href="https://www.cmu.edu/" target="_blank">
         <img class="collab-logo" src="iisc_logo.png" alt="Carnegie Mellon University logo"
-             onerror="this.style.background='#c41230'; this.style.content='CMU'">
+             onerror="this.style.background='#c41230'">
         <span class="collab-name">Carnegie Mellon University</span>
       </a>
 
