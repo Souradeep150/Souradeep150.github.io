@@ -247,418 +247,711 @@
   <title>Souradeep Mukhopadhyay</title>
   <meta name="author" content="Souradeep Mukhopadhyay">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💡</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-<style>
+  <style>
+    :root {
+      --ink:       #0f1117;
+      --ink-light: #3a3d4a;
+      --muted:     #7a7f93;
+      --rule:      #e4e6ef;
+      --bg:        #faf9f7;
+      --card:      #ffffff;
+      --gold:      #b8922a;
+      --gold-lt:   #f5edd7;
+      --blue:      #1a3a5c;
+      --blue-lt:   #e8eef5;
+      --radius:    10px;
+      --shadow:    0 2px 20px rgba(15,17,23,.07);
+    }
 
-  heading {
-    display: block;
-    margin: 0 0 0 0; 
-  }
-  .toggle-container {
-    text-align: left;
-    margin: 12px 0 0 0; 
-  }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  #papers {
-    margin-top: 2px;         
-    border-spacing: 0;       
-  }
+    html { scroll-behavior: smooth; }
 
-  #papers > tbody > tr:first-child > td {
-    padding-top: 6px !important; 
-  }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  .toggle-link {
-    cursor: pointer;
-    color: #888;
-    font-weight: 500;
-    margin: 0 4px 0 0;
-    transition: color 0.2s ease-in-out;
-  }
-  .toggle-link.active {
-    color: #000;
-    font-weight: 700;
-  }
-  .toggle-link:not(.active):hover {
-    color: #444;
-  }
+    /* ── Subtle noise texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
 
-  /* ── Research Collaborations ── */
-  .collab-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 10px 0 6px 0;
-  }
-  .collab-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    width: 110px;
-    text-align: center;
-  }
-  .collab-item img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-    filter: grayscale(20%);
-    transition: filter 0.2s;
-  }
-  .collab-item img:hover {
-    filter: grayscale(0%);
-  }
-  .collab-item span {
-    font-size: 11px;
-    color: #555;
-    line-height: 1.3;
-  }
+    /* ── Layout wrapper ── */
+    .wrapper {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      position: relative; z-index: 1;
+    }
 
-  /* ── Achievements ── */
-  .achievement-list {
-    list-style: none;
-    padding: 8px 0 0 0;
-    margin: 0;
-  }
-  .achievement-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 7px 0;
-    border-bottom: 1px solid #f0f0f0;
-    font-size: 14px;
-    line-height: 1.5;
-  }
-  .achievement-list li:last-child {
-    border-bottom: none;
-  }
-  .achievement-list li .ach-icon {
-    margin-top: 2px;
-    color: #c8a415;
-    font-size: 13px;
-    flex-shrink: 0;
-  }
-</style>
+    /* ── TOP NAV BAR ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0 20px;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 56px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: .03em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
 
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      gap: 48px;
+      align-items: start;
+      margin-bottom: 72px;
+      animation: fadeUp .7s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
+    .hero-text h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 6vw, 56px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -.01em;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+    .hero-text .role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold-lt);
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 40px;
+      margin-bottom: 22px;
+    }
+    .hero-text .role-badge i { font-size: 10px; }
+
+    .hero-text p {
+      color: var(--ink-light);
+      font-size: 15px;
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 14px;
+    }
+    .hero-text p a, .prose a {
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      transition: color .2s;
+    }
+    .hero-text p a:hover, .prose a:hover { color: var(--gold); }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 18px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all .2s;
+      border: 1.5px solid transparent;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: #0f2540;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(26,58,92,.25);
+    }
+    .btn-ghost {
+      border-color: var(--rule);
+      color: var(--ink-light);
+      background: var(--card);
+    }
+    .btn-ghost:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      transform: translateY(-1px);
+    }
+
+    .hero-photo {
+      position: relative;
+    }
+    .hero-photo::before {
+      content: '';
+      position: absolute;
+      inset: -6px -6px 6px 6px;
+      border: 1.5px solid var(--gold);
+      border-radius: 14px;
+      z-index: 0;
+      opacity: .5;
+    }
+    .hero-photo img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .section-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: -.01em;
+      color: var(--ink);
+    }
+    .section-header .rule-line {
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    section { margin-bottom: 68px; animation: fadeUp .7s ease both; }
+    section:nth-child(2) { animation-delay: .08s; }
+    section:nth-child(3) { animation-delay: .14s; }
+    section:nth-child(4) { animation-delay: .20s; }
+    section:nth-child(5) { animation-delay: .26s; }
+
+    /* ── NEWS ── */
+    .news-scroll {
+      max-height: 150px;
+      overflow-y: auto;
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 8px 0;
+    }
+    .news-scroll::-webkit-scrollbar { width: 4px; }
+    .news-scroll::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 10px; }
+
+    .news-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 11px 18px;
+      border-bottom: 1px solid var(--rule);
+      transition: background .15s;
+    }
+    .news-item:last-child { border-bottom: none; }
+    .news-item:hover { background: var(--gold-lt); }
+    .news-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+    .news-text { font-size: 14px; color: var(--ink-light); line-height: 1.5; }
+    .news-text a { color: var(--blue); text-decoration: none; }
+    .news-text a:hover { text-decoration: underline; }
+    .news-text strong { color: var(--ink); }
+
+    /* ── PUBLICATIONS TOGGLE ── */
+    .pub-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 22px;
+    }
+    .pub-toggle-btn {
+      padding: 5px 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      border: 1.5px solid var(--rule);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .pub-toggle-btn.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+    .pub-toggle-btn:not(.active):hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    /* ── PAPER CARDS ── */
+    .papers-list { display: flex; flex-direction: column; gap: 18px; }
+
+    .paper-card {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 20px;
+      align-items: start;
+      transition: all .2s;
+      box-shadow: var(--shadow);
+    }
+    .paper-card:hover {
+      border-color: #b0bbcf;
+      box-shadow: 0 6px 30px rgba(15,17,23,.10);
+      transform: translateY(-2px);
+    }
+    .paper-card.highlight {
+      border-left: 3px solid var(--gold);
+    }
+    .paper-thumb {
+      width: 120px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: var(--blue-lt);
+    }
+    .paper-venue-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--blue-lt);
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .paper-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.35;
+      color: var(--ink);
+      margin-bottom: 7px;
+    }
+    .paper-authors {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .paper-authors strong { color: var(--ink-light); }
+    .paper-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--blue);
+      text-decoration: none;
+      padding: 5px 12px;
+      border: 1.5px solid currentColor;
+      border-radius: 5px;
+      transition: all .2s;
+    }
+    .paper-link:hover {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    /* ── COLLABORATIONS ── */
+    .collab-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .collab-card {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all .2s;
+      text-decoration: none;
+      flex: 1;
+      min-width: 180px;
+      box-shadow: var(--shadow);
+    }
+    .collab-card:hover {
+      border-color: #b0bbcf;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(15,17,23,.10);
+    }
+    .collab-logo {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      border-radius: 6px;
+      flex-shrink: 0;
+      background: var(--blue-lt);
+      padding: 4px;
+    }
+    .collab-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-light);
+      line-height: 1.3;
+    }
+
+    /* ── ACHIEVEMENTS ── */
+    .achievement-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .ach-card {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      box-shadow: var(--shadow);
+      transition: all .2s;
+    }
+    .ach-card:hover {
+      border-color: #e0c96a;
+      transform: translateY(-1px);
+    }
+    .ach-icon-wrap {
+      width: 36px;
+      height: 36px;
+      background: var(--gold-lt);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .ach-icon-wrap i { color: var(--gold); font-size: 14px; }
+    .ach-text { font-size: 14px; color: var(--ink-light); line-height: 1.55; }
+    .ach-text strong { color: var(--ink); font-weight: 500; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 32px 0 0;
+      border-top: 1px solid var(--rule);
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+    footer a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+    footer a:hover { color: var(--ink); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 620px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-photo { display: none; }
+      .paper-card { grid-template-columns: 1fr; }
+      .paper-thumb { width: 100%; height: 140px; }
+      nav { gap: 12px; }
+      .nav-links { gap: 16px; }
+    }
+  </style>
 </head>
-
 <body>
-  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-    <tbody>
-      <tr style="padding:0px">
-        <td style="padding:0px">
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr style="padding:0px">
-                <td style="padding:2.5%;width:63%;vertical-align:middle">
-                  <p style="text-align:center">
-                    <name>Souradeep Mukhopadhyay</name>
-                  </p>
-<p>
-  I am a first-year Ph.D. student in Computer Science at
-  <a href="https://www.asu.edu/">Arizona State University</a>
-  (QS World University Rankings 2026: #=173), advised by Prof.
-  <a href="https://www.public.asu.edu/~cbaral/">Chitta Baral</a>.
-  My research interests include LLM-based agentic systems, systematic LLM failure modes, and world models.
-</p>
 
-<p>
-  I received my B.Tech in Computer Science with First Class Honors and distinction from
-  <a href="https://jadavpuruniversity.in/">Jadavpur University</a>
-  (QS WUR 2026: #=676; NIRF 2025: #9 in University; #1 in State Public Universities),
-  where I was advised by Prof.
-  <a href="https://scholar.google.co.in/citations?user=bDj0BUEAAAAJ&hl=en">Ram Sarkar</a>.
-  I then completed my M.Tech. in Artificial Intelligence at the
-  <a href="https://iisc.ac.in/">Indian Institute of Science, Bengaluru</a>
-  (QS WUR 2026: #=219; NIRF 2025: #1 in University), and joined
-  <a href="https://www.nokia.com/contact-us/worldwide-offices/india/">Nokia</a>
-  as a Research Specialist for one year.
-</p>
-                  
+<div class="wrapper">
 
-                  <p style="text-align:center">
-                    <a href="mailto:smukho11@asu.edu" style="margin: 0 5px;"><i class="fa-solid fa-envelope"></i></a> &nbsp;/&nbsp;
-                    <a href="Souradeep_CV.pdf" style="margin: 0 5px;"><i class="fa-solid fa-file"></i></a> &nbsp;/&nbsp;
-                    <a href="https://scholar.google.com/citations?user=Oz_A-coAAAAJ&hl=en" style="margin: 0 5px;"><i class="fa-brands fa-google-scholar"></i></a> &nbsp;/&nbsp;
-                    <a href="https://x.com/SouradeepM97426" style="margin: 0 5px;"><i class="fa-brands fa-x-twitter"></i></a> &nbsp;/&nbsp;
-                    <a href="https://github.com/Souradeep150/" style="margin: 0 5px;"><i class="fa-brands fa-github"></i></a>
-                  </p>
-                </td>
-                <td style="padding:2.5%;width:40%;max-width:40%">
-                  <a href="DP2.jpeg"><img style="width:100%;max-width:100%" alt="profile photo" src="DP2.jpeg" class="hoverZoomLink"></a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <!-- ═══ NAV ═══ -->
+  <nav>
+    <a class="nav-brand" href="#">Souradeep Mukhopadhyay</a>
+    <ul class="nav-links">
+      <li><a href="#news">News</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#collaborations">Collaborations</a></li>
+      <li><a href="#achievements">Achievements</a></li>
+    </ul>
+  </nav>
 
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;margin-top:-10px">
-            <tbody>
-              <tr style="padding:0px">
-                <td style="padding:2.5%;vertical-align:middle;width:63%">
-                  <a id="news"><heading>News</heading></a>
-                  <p>
-                    <div style="width:100%;overflow-y:scroll; height:100px;">
-                      <ul id="News">
-                        <li> January, 2026 - TAing in CSE 598(Agentic AI) under Prof. <a href="https://search.asu.edu/profile/231973">Chitta Baral</a> for Spring 2026.</li>
-                        <li> January, 2026 - Received the <b>SCAI</b> University Graduate Fellowship (UGF) of $4500.</li>
-                         <li> August, 2025 - TAing in CSE 100(Prin of Programming with C++) under Prof. <a href="https://search.asu.edu/profile/325953">Yoshihiro Kobayashi</a> for Fall 2025.</li>
-                        <li> August, 2025 - Started my PhD.</li>
-                      </ul>
-                    </div>
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <!-- ═══ HERO ═══ -->
+  <div class="hero">
+    <div class="hero-text">
+      <div class="role-badge"><i class="fa-solid fa-circle-dot"></i> Ph.D. Student · Computer Science</div>
+      <h1>Souradeep<br>Mukhopadhyay</h1>
 
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr>
-                <td style="padding:20px;width:100%;vertical-align:middle">
-                  <a id="research"><heading>Publications</heading></a>
-                  <div class="toggle-container">
-                    <span id="show-selected" class="toggle-link active">Selected</span>
-                    <span style="color: #ccc;">/</span>
-                    <span id="show-all" class="toggle-link">All</span>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <p>
+        I am a first-year Ph.D. student at
+        <a href="https://www.asu.edu/">Arizona State University</a>
+        (QS #=173), advised by Prof.
+        <a href="https://www.public.asu.edu/~cbaral/">Chitta Baral</a>.
+        My research spans <strong>LLM-based agentic systems</strong>, systematic LLM failure modes, and world models.
+      </p>
 
-          <table id="papers" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
+      <p>
+        I hold a B.Tech (First Class Honors) from
+        <a href="https://jadavpuruniversity.in/">Jadavpur University</a>
+        (QS #=676, NIRF #9) under Prof. <a href="https://scholar.google.co.in/citations?user=bDj0BUEAAAAJ&hl=en">Ram Sarkar</a>,
+        an M.Tech in AI from
+        <a href="https://iisc.ac.in/">IISc Bengaluru</a>
+        (QS #=219, NIRF #1), and one year as a Research Specialist at
+        <a href="https://www.nokia.com/contact-us/worldwide-offices/india/">Nokia</a>.
+      </p>
 
-              <tr class="representative">
-                <td style="padding:15px;width:25%;vertical-align:middle">
-                  <div style="text-align: center; display: flex; justify-content: center; align-items: center; overflow: hidden;">
-                    <img src="meta.jpeg" alt="spright" style="max-width: 100%; max-height: 100%; width: auto; height: auto;">
-                  </div>
-                </td>
-                <td width="75%" valign="middle">
-                  <span><papertitle>Meta-Learning to Teach Semantic Prompts for Open Domain Generalization in Vision-Language Models</papertitle></span>           
-                  <br>
-                  Shirsha Bose, Mainak Singha, Ankit Jha, <strong>Souradeep Mukhopadhyay</strong>, Biplab Banerjee
-                  <br>
-                  <em>Transaction on Machine Learning Research 2025</em>
-                  <p><a href="https://openreview.net/pdf?id=uJELgNGiMW">Paper</a> </p>
-                </td>
-              </tr>
+      <div class="hero-actions">
+        <a href="mailto:smukho11@asu.edu" class="btn btn-primary"><i class="fa-solid fa-envelope"></i> Email</a>
+        <a href="Souradeep_CV.pdf" class="btn btn-ghost"><i class="fa-solid fa-file-lines"></i> CV</a>
+        <a href="https://scholar.google.com/citations?user=Oz_A-coAAAAJ&hl=en" class="btn btn-ghost"><i class="fa-brands fa-google-scholar"></i> Scholar</a>
+        <a href="https://x.com/SouradeepM97426" class="btn btn-ghost"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
+        <a href="https://github.com/Souradeep150/" class="btn btn-ghost"><i class="fa-brands fa-github"></i> GitHub</a>
+      </div>
+    </div>
 
-              <tr>
-                <td style="padding:15px;width:25%;vertical-align:middle">
-                  <div style="text-align: center; display: flex; justify-content: center; align-items: center; overflow: hidden;">
-                    <img src="nature.jpeg" alt="act2i" style="max-width: 100%; max-height: 100%; width: auto; height: auto;">
-                  </div>
-                </td>
-                <td width="75%" valign="middle">
-                  <span><papertitle>Deep Learning Model for Grading Carcinoma with Gini-based Feature Selection and Linear Production-inspired Feature Fusion</papertitle></span>
-                  <br>
-                   Shreyan Kundu*, <strong>Souradeep Mukhopadhyay*</strong>, Rahul Talukdar, Dmitrii Kaplun, Alexander Voznesensky, Ram Sarkar
-                  <br>
-                  <em> Nature Sci Reports 2025 </em>    
-                  <p><a href="https://www.nature.com/articles/s41598-025-00217-w">Paper</a></p>
-                </td>
-              </tr>
+    <div class="hero-photo">
+      <img src="DP2.jpeg" alt="Souradeep Mukhopadhyay">
+    </div>
+  </div>
 
-                    <tr>
-                <td style="padding:15px;width:25%;vertical-align:middle">
-                  <div style="text-align: center; display: flex; justify-content: center; align-items: center; overflow: hidden;">
-                    <img src="oup.jpeg" alt="act2i" style="max-width: 100%; max-height: 100%; width: auto; height: auto;">
-                  </div>
-                </td>
-                <td width="75%" valign="middle">
-                  <span><papertitle>Towards molecular structure discovery from cryo-ET density volumes via modelling auxiliary semantic prototypes</papertitle></span>
-                  <br>
-                   Ashwin Nair, Xingjian Li, Bhupendra Solanki , <strong>Souradeep Mukhopadhyay</strong>, Ankit Jha, Mostofa Rafid Uddin, Mainak Singha, Biplab Banerjee, Min Xu
-                  <br>
-                  <em>Briefings in Bioinformatics, Oxford University Press 2025</em>    
-                  <p><a href="https://academic.oup.com/bib/article/26/1/bbae570/7960051">Paper</a></p>
-                </td>
-              </tr>
+  <!-- ═══ NEWS ═══ -->
+  <section id="news">
+    <div class="section-header">
+      <h2>News</h2>
+      <div class="rule-line"></div>
+    </div>
+    <div class="news-scroll">
+      <div class="news-item">
+        <span class="news-date">Jan 2026</span>
+        <span class="news-text">TAing <strong>CSE 598 (Agentic AI)</strong> under Prof. <a href="https://search.asu.edu/profile/231973">Chitta Baral</a> for Spring 2026.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">Jan 2026</span>
+        <span class="news-text">Received the <strong>SCAI University Graduate Fellowship (UGF)</strong> of $4,500.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">Aug 2025</span>
+        <span class="news-text">TAing <strong>CSE 100 (Principles of Programming with C++)</strong> under Prof. <a href="https://search.asu.edu/profile/325953">Yoshihiro Kobayashi</a> for Fall 2025.</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">Aug 2025</span>
+        <span class="news-text">Started my Ph.D. at <strong>Arizona State University</strong>.</span>
+      </div>
+    </div>
+  </section>
 
-            </tbody>
-          </table>
+  <!-- ═══ PUBLICATIONS ═══ -->
+  <section id="publications">
+    <div class="section-header">
+      <h2>Publications</h2>
+      <div class="rule-line"></div>
+    </div>
 
+    <div class="pub-toggle">
+      <button class="pub-toggle-btn active" id="btn-selected">Selected</button>
+      <button class="pub-toggle-btn" id="btn-all">All</button>
+    </div>
 
-          <!-- ═══════════════════════════════════════════════
-               RESEARCH COLLABORATIONS
-               To add/remove an institute:
-                 • Add/remove a <div class="collab-item"> block
-                 • Set src to the institute logo file (e.g. "iisc_logo.png")
-                 • Update the <span> with the short institute name
-                 • Optionally wrap the <img> in <a href="..."> for a link
-          ══════════════════════════════════════════════════ -->
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr>
-                <td style="padding:20px 20px 6px 20px;width:100%;vertical-align:middle">
-                  <a id="collaborations"><heading>Research Collaborations</heading></a>
-                  <div class="collab-grid">
+    <div class="papers-list">
 
-                    <!-- Institute 1 — replace src, href, and label -->
-                    <div class="collab-item">
-                      <a href="https://www.iitb.ac.in/" target="_blank">
-                        <img src="asu_logo.png" alt="IIT Bombay"
-                             onerror="this.src='https://engageindia.ca/wp-content/uploads/2017/01/IITB-500x500.png'">
-                      </a>
-                      <span>IIT Bombay</span>
-                    </div>
+      <!-- Paper 1 — representative / selected -->
+      <div class="paper-card highlight" data-type="representative">
+        <img class="paper-thumb" src="meta.jpeg" alt="Meta-Learning paper thumbnail" onerror="this.style.display='none'">
+        <div>
+          <span class="paper-venue-tag"><i class="fa-solid fa-landmark"></i> TMLR 2025</span>
+          <div class="paper-title">Meta-Learning to Teach Semantic Prompts for Open Domain Generalization in Vision-Language Models</div>
+          <div class="paper-authors">Shirsha Bose, Mainak Singha, Ankit Jha, <strong>Souradeep Mukhopadhyay</strong>, Biplab Banerjee</div>
+          <a href="https://openreview.net/pdf?id=uJELgNGiMW" class="paper-link" target="_blank">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Paper
+          </a>
+        </div>
+      </div>
 
-                    <!-- Institute 2 -->
-                    <div class="collab-item">
-                      <a href="https://www.cmu.edu/" target="_blank">
-                        <img src="iisc_logo.png" alt="Carnegie Mellon University"
-                             onerror="this.src='data:image/png;base64,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'">
-                      </a>
-                      <span>Carnegie Mellon University</span>
-                    </div>
+      <!-- Paper 2 — all -->
+      <div class="paper-card" data-type="all">
+        <img class="paper-thumb" src="nature.jpeg" alt="Nature Sci Reports thumbnail" onerror="this.style.display='none'">
+        <div>
+          <span class="paper-venue-tag"><i class="fa-solid fa-landmark"></i> Nature Sci Reports 2025</span>
+          <div class="paper-title">Deep Learning Model for Grading Carcinoma with Gini-based Feature Selection and Linear Production-inspired Feature Fusion</div>
+          <div class="paper-authors">Shreyan Kundu*, <strong>Souradeep Mukhopadhyay*</strong>, Rahul Talukdar, Dmitrii Kaplun, Alexander Voznesensky, Ram Sarkar</div>
+          <a href="https://www.nature.com/articles/s41598-025-00217-w" class="paper-link" target="_blank">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Paper
+          </a>
+        </div>
+      </div>
 
-                    <!-- Institute 3 -->
-                    <div class="collab-item">
-                      <a href="https://en.knu.ac.kr/main/main.htm" target="_blank">
-                        <img src="ju_logo.png" alt="Kyungpook National University"
-                             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Knuemblem00.jpg'">
-                      <span>Kyungpook National University</span>
-                    </div>
+      <!-- Paper 3 — all -->
+      <div class="paper-card" data-type="all">
+        <img class="paper-thumb" src="oup.jpeg" alt="Briefings in Bioinformatics thumbnail" onerror="this.style.display='none'">
+        <div>
+          <span class="paper-venue-tag"><i class="fa-solid fa-landmark"></i> Briefings in Bioinformatics, OUP 2025</span>
+          <div class="paper-title">Towards Molecular Structure Discovery from Cryo-ET Density Volumes via Modelling Auxiliary Semantic Prototypes</div>
+          <div class="paper-authors">Ashwin Nair, Xingjian Li, Bhupendra Solanki, <strong>Souradeep Mukhopadhyay</strong>, Ankit Jha, Mostofa Rafid Uddin, Mainak Singha, Biplab Banerjee, Min Xu</div>
+          <a href="https://academic.oup.com/bib/article/26/1/bbae570/7960051" class="paper-link" target="_blank">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Paper
+          </a>
+        </div>
+      </div>
 
+    </div>
+  </section>
 
-                    <div class="collab-item">
-                      <a href="https://www.torrens.edu.au/" target="_blank">
-                        <img src="ju_logo.png" alt="Torrens University Australia"
-                             onerror="this.src='https://www.courseseeker.edu.au/assets/images/institution-tua.png'">
-                      <span>Torrens University Australia</span>
-                    </div>
+  <!-- ═══ COLLABORATIONS ═══ -->
+  <section id="collaborations">
+    <div class="section-header">
+      <h2>Research Collaborations</h2>
+      <div class="rule-line"></div>
+    </div>
+    <div class="collab-grid">
 
-                    <div class="collab-item">
-                      <a href="https://www.usd.edu/" target="_blank">
-                        <img src="ju_logo.png" alt="University of South Dakota"
-                             onerror="this.src='https://upload.wikimedia.org/wikipedia/en/3/31/University_of_South_Dakota_seal.svg'">
-                      <span>University of South Dakota</span>
-                    </div>
+      <a class="collab-card" href="https://www.iitb.ac.in/" target="_blank">
+        <img class="collab-logo" src="asu_logo.png" alt="IIT Bombay logo"
+             onerror="this.src='https://engageindia.ca/wp-content/uploads/2017/01/IITB-500x500.png'">
+        <span class="collab-name">IIT Bombay</span>
+      </a>
 
-          
+      <a class="collab-card" href="https://www.cmu.edu/" target="_blank">
+        <img class="collab-logo" src="iisc_logo.png" alt="Carnegie Mellon University logo"
+             onerror="this.style.background='#c41230'; this.style.content='CMU'">
+        <span class="collab-name">Carnegie Mellon University</span>
+      </a>
 
+      <a class="collab-card" href="https://en.knu.ac.kr/main/main.htm" target="_blank">
+        <img class="collab-logo" src="ju_logo.png" alt="Kyungpook National University logo"
+             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Knuemblem00.jpg'">
+        <span class="collab-name">Kyungpook National University</span>
+      </a>
 
-                    <!-- ── ADD MORE INSTITUTES BELOW ──
-                    <div class="collab-item">
-                      <a href="INSTITUTE_URL" target="_blank">
-                        <img src="LOGO_FILE.png" alt="Institute Name">
-                      </a>
-                      <span>Institute Name</span>
-                    </div>
-                    -->
+      <a class="collab-card" href="https://www.torrens.edu.au/" target="_blank">
+        <img class="collab-logo" src="ju_logo.png" alt="Torrens University logo"
+             onerror="this.src='https://www.courseseeker.edu.au/assets/images/institution-tua.png'">
+        <span class="collab-name">Torrens University Australia</span>
+      </a>
 
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <a class="collab-card" href="https://www.usd.edu/" target="_blank">
+        <img class="collab-logo" src="ju_logo.png" alt="University of South Dakota logo"
+             onerror="this.src='https://upload.wikimedia.org/wikipedia/en/3/31/University_of_South_Dakota_seal.svg'">
+        <span class="collab-name">University of South Dakota</span>
+      </a>
 
+    </div>
+  </section>
 
-          <!-- ═══════════════════════════════════════════════
-               ACHIEVEMENTS
-               To add/remove an entry:
-                 • Add/remove a <li> inside .achievement-list
-                 • The <i> tag is the trophy icon — keep it as-is
-                 • Put the achievement text inside the <div>
-          ══════════════════════════════════════════════════ -->
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr>
-                <td style="padding:20px 20px 20px 20px;width:100%;vertical-align:middle">
-                  <a id="achievements"><heading>Achievements</heading></a>
-                  <ul class="achievement-list">
+  <!-- ═══ ACHIEVEMENTS ═══ -->
+  <section id="achievements">
+    <div class="section-header">
+      <h2>Achievements</h2>
+      <div class="rule-line"></div>
+    </div>
+    <ul class="achievement-list">
 
-                   
-                    <li>
-                      <i class="fa-solid fa-trophy ach-icon"></i>
-                      <div><strong>Graduate Aptitude Test in Engineering (GATE-2022)</strong> CSE All India Rank 44 out of ~78000 candidates.</div>
-                    </li>
+      <li class="ach-card">
+        <div class="ach-icon-wrap"><i class="fa-solid fa-trophy"></i></div>
+        <span class="ach-text"><strong>GATE-CSE 2022</strong> — All India Rank <strong>44</strong> out of ~78,000 candidates.</span>
+      </li>
 
-                    <li>
-                      <i class="fa-solid fa-trophy ach-icon"></i>
-                      <div> <strong>Indian Statistical Institute</strong> Rank 2 in Mtech CS Exam.</div>
-                    </li>
+      <li class="ach-card">
+        <div class="ach-icon-wrap"><i class="fa-solid fa-medal"></i></div>
+        <span class="ach-text"><strong>Indian Statistical Institute</strong> — Rank <strong>2</strong> in M.Tech CS Entrance Exam.</span>
+      </li>
 
-                     <li>
-                      <i class="fa-solid fa-trophy ach-icon"></i>
-                      <div> <strong> Kishore Vaigyanik Protsahan Yojana (KVPY 2018)</strong> SX Fellow with Physics, Chem, Maths. </div>
-                    </li>
+      <li class="ach-card">
+        <div class="ach-icon-wrap"><i class="fa-solid fa-star"></i></div>
+        <span class="ach-text"><strong>KVPY 2018 (SX Fellow)</strong> — Kishore Vaigyanik Protsahan Yojana in Physics, Chemistry, and Mathematics.</span>
+      </li>
 
-                    <li>
-                      <i class="fa-solid fa-trophy ach-icon"></i>
-                      <div> <strong> West Bengal Joint Entrance Examinations (WBJEE 2018)</strong> Rank 106 out of ~1 lakh candidates. </div>
-                    </li>
-                    <!-- ── ADD MORE ACHIEVEMENTS BELOW ──
-                    <li>
-                      <i class="fa-solid fa-trophy ach-icon"></i>
-                      <div>Your achievement text here.</div>
-                    </li>
-                    -->
+      <li class="ach-card">
+        <div class="ach-icon-wrap"><i class="fa-solid fa-award"></i></div>
+        <span class="ach-text"><strong>WBJEE 2018</strong> — Rank <strong>106</strong> out of ~1 lakh candidates in West Bengal Joint Entrance Examinations.</span>
+      </li>
 
-                  </ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    </ul>
+  </section>
 
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <p>Source code inspired by <a href="https://github.com/jonbarron/jonbarron_website">Jon Barron</a>. &nbsp;·&nbsp; Last updated: September 2025</p>
+  </footer>
 
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-            <tbody>
-              <tr>
-                <td style="padding:0px">
-                  <br>
-                  <p style="text-align:center;font-size:small;">
-                    This website's source code is borrowed from <a href="https://github.com/jonbarron/jonbarron_website">Jon Barron</a>.
-                    <br>Last Updated: September 2025
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+</div><!-- /wrapper -->
 
-  <script>
-  (function () {
-    const showSelectedBtn = document.getElementById('show-selected');
-    const showAllBtn = document.getElementById('show-all');
-    const papersTable = document.getElementById('papers');
+<script>
+  (function() {
+    const btnSelected = document.getElementById('btn-selected');
+    const btnAll      = document.getElementById('btn-all');
+    const allCards    = document.querySelectorAll('.paper-card[data-type="all"]');
 
-    if (!showSelectedBtn || !showAllBtn || !papersTable) return;
-
-    const nonRepRows = Array.from(papersTable.querySelectorAll('tr:not(.representative)'));
-
-    function showSelectedPapers() {
-      nonRepRows.forEach(tr => tr.style.display = 'none');
-      showSelectedBtn.classList.add('active');
-      showAllBtn.classList.remove('active');
+    function showSelected() {
+      allCards.forEach(c => { c.style.display = 'none'; });
+      btnSelected.classList.add('active');
+      btnAll.classList.remove('active');
+    }
+    function showAll() {
+      allCards.forEach(c => { c.style.display = ''; });
+      btnAll.classList.add('active');
+      btnSelected.classList.remove('active');
     }
 
-    function showAllPapers() {
-      nonRepRows.forEach(tr => tr.style.display = ''); // Resets to default display
-      showAllBtn.classList.add('active');
-      showSelectedBtn.classList.remove('active');
-    }
-
-    // Add click event listeners
-    showSelectedBtn.addEventListener('click', showSelectedPapers);
-    showAllBtn.addEventListener('click', showAllPapers);
-
-    // Set the initial state on page load
-    showSelectedPapers();
+    btnSelected.addEventListener('click', showSelected);
+    btnAll.addEventListener('click', showAll);
+    showSelected();
   })();
-  </script>
+</script>
+
 </body>
 </html>
